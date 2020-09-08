@@ -16,24 +16,26 @@ with open(election_csv) as csv_file:
 		# Calculate total number of votes cast
 		total_votes += 1
 		
-		# List unique candidates
+		# Tally votes if candidate is in candidates[]
 		if row[2] in candidates:
 			unique_candidate = candidates.index(row[2])
 			candidate_votes[unique_candidate] = candidate_votes[unique_candidate] + 1
+		# Else, add unique candidate to candidates[] and make a spot for them to tally their votes
 		else:
-			candidates.append(row[2])
 			candidate_votes.append(1)
+			candidates.append(row[2])
 
 	# Assign variables to find winner
 	percentages = []
 	max_index = 0
 
-	# Find percentages and max percentage
+	# Calculate percentages and add to percentages[]
 	for i in range(len(candidates)):
-		vote_percentage = round((candidate_votes[i]/total_votes)*100, 3)
+		vote_percentage = round((candidate_votes[i]/total_votes*100), 3)
 		percentages.append(vote_percentage)
-		if candidate_votes[i] > candidate_votes[0]:
-			candidate_votes[0] = candidate_votes[i]
+		# Find winner
+		if percentages[i] > percentages[0]:
+			percentages[0] = percentages[i]
 			max_index = i
 	winner = candidates[max_index]
 
