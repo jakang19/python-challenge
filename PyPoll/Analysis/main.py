@@ -8,13 +8,57 @@ with open(election_csv) as csv_file:
 	header = next(csv_reader)
 	
 	# Assign variables
-	total_votes = []
+	total_votes = 0
 	candidates = []
+	candidate_votes = []
 
 	for row in csv_reader:
 		# Calculate total number of votes cast
-		total_votes.append(row[0])
-		votes = len(total_votes)
-print(votes)
+		total_votes += 1
 		
-			
+		# List unique candidates
+		if row[2] in candidates:
+			unique_candidate = candidates.index(row[2])
+			candidate_votes[unique_candidate] = candidate_votes[unique_candidate] + 1
+		else:
+			candidates.append(row[2])
+			candidate_votes.append(1)
+
+	# Assign variables to find winner
+	percentages = []
+	max_index = 0
+
+	# Find percentages and max percentage
+	for i in range(len(candidates)):
+		vote_percentage = round((candidate_votes[i]/total_votes)*100, 3)
+		percentages.append(vote_percentage)
+		if candidate_votes[i] > candidate_votes[0]:
+			candidate_votes[0] = candidate_votes[i]
+			max_index = i
+	winner = candidates[max_index]
+
+# Print results
+results = (
+"Election Results\n"
+"--------------------------\n"
+f"Total Votes: {total_votes}\n"
+"--------------------------")
+
+results_cont = (
+"--------------------------\n"
+f"Winner:  {winner}\n"
+"--------------------------")
+
+print(results)
+for i in range(len(candidates)):
+	print(f"{candidates[i]}: {percentages[i]}% ({candidate_votes[i]})")
+print(results_cont)
+
+# output path
+output = os.path.join(".","election results.txt")
+with open(output,"w") as text_file:
+	text_file.write(results)
+	for i in range(len(candidates)):
+		text_file.write(f"{candidates[i]}: {percentages[i]}% ({candidate_votes[i]})")
+	text_file.write(results_cont)
+		
