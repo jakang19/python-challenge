@@ -2,8 +2,7 @@
 ## Background
 Using Pyton scripting to analyze real world financial and polling data. 
 
-## PyBank
-## Financial Analysis
+## PyBank - Financial Analysis
 This script analyzes the file `budget_data.csv` and calculates the following information:
 - The total number of months included in the dataset
 - The net total amount of "Profit/Losses" over the entire period
@@ -11,8 +10,7 @@ This script analyzes the file `budget_data.csv` and calculates the following inf
 - The greatest increase in profits (date and amount) over the entire period
 - The greatest decrease in losses (date and amount) over the entire period
 
-## PyPoll
-## Polling Analysis
+## PyPoll - Polling Analysis
 This script analyzes the file `election_data.csv` and calculates the following information:
 - The total number of votes cast
 - A complete list of candidates who received votes
